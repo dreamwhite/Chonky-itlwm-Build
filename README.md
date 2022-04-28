@@ -1,6 +1,6 @@
-# ChonkyAirportItlwm
+# Chonky-itlwm
 
-The following guide will help you light that chonk `AirportItlwm.kext`
+The following guide will help you light that chonk `AirportItlwm.kext` and `itlwm.kext`
 
 ## Requirements
 
