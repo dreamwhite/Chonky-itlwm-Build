@@ -25,14 +25,14 @@ In my case, the firmware version is `iwm-8000C-36`
 
 ### Slim that fat boi AirportItlwm
 
-1. Clone IntelBluetoothFirmware and open the source project
+1. Clone itlwm and open the source project
 2. Remove `FwBinary.cpp` from `$(source)/include/` as it contains already compressed firmware files
-3. Remove every firmware file in `$(source)/itlwm/firmware` except the one which name starts with the previously identified firmware name (e.g. in my case `ibt-17-16-1.sfi` and `ibt-17-16-1.ddc`)
+3. Remove every firmware file in `$(source)/itlwm/firmware` except the one which name starts with the previously identified firmware name (e.g. in my case `iwm-8000C-36`)
 
 ![](/.assets/images/firmware.png)
 
 4. Clone MacKernelSDK onto `$(source)` with `git clone https://github.com/acidanthera/MacKernelSDK.git`.
-5. Open XCode and build the project with `Release` configuration using `⇧⌘R` and after it finishes building the project, replace the old `AirportItlwm.kext` with the newly generated for your OS version
+5. Open XCode and build the project with `Release` configuration using `⇧⌘R` and after it finishes building the project, replace the old `AirportItlwm.kext` (or `itlwm.kext`) with the newly generated for your OS version
 
 # How to generate every single firmware
 
