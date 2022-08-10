@@ -41,6 +41,10 @@ In my case, the firmware version is `iwm-8000C-36`
 Run `python3 main.py` and see the magic happen.
 Created kexts will be in `Kexts` folder
 
+# Issues
+
+If you encounter any issue, please file a bugreport [here](https://github.com/dreamwhite/bugtracker/issues/new?assignees=dreamwhite&labels=bug&template=generic.md&title=)
+
 # Credits
 
 - [Apple](https://apple.com) for [XCode](https://developer.apple.com/xcode/) and [IORegistryExplorer](https://github.com/utopia-team/IORegistryExplorer)
