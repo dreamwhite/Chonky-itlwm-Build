@@ -20,7 +20,7 @@ jobs:
       - name: Get itlwm latest stable release
         id: itlwm-latest-release
         working-directory: itlwm
-        run: echo "::set-output name=tag-name::$(git describe --tags `git rev-list --tags --max-count=1`)"
+        run: echo "::set-output name=tag-name::$(git describe --tags --abbrev=0)"
       - name: Checkout to itlwm latest stable release
         working-directory: itlwm
         run: git checkout ${{ steps.itlwm-latest-release.outputs.tag-name }}
