@@ -21,9 +21,9 @@ jobs:
         id: itlwm-latest-release
         working-directory: itlwm
         run: echo "::set-output name=tag-name::$(git describe --tags `git rev-list --tags --max-count=1`)"
-      # - name: Checkout to AppleALC latest stable release
-      #   working-directory: AppleALC
-      #   run: git checkout ${{ steps.applealc-latest-release.outputs.tag-name }}
+      - name: Checkout to itlwm latest stable release
+        working-directory: itlwm
+        run: git checkout ${{ steps.itlwm-latest-release.outputs.tag-name }}
       # - name: Remove compressed kern_resources.cpp
       #   working-directory: AppleALC
       #   run: "[ ! -e AppleALC/kern_resources.cpp ] && rm -rf AppleALC/kern_resources.cpp"
