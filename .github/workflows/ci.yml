@@ -42,6 +42,7 @@ jobs:
         working-directory: itlwm
         run: |
           for firmware in itlwm/firmware_bak; do
+            echo $firmware
             if [ -e itlwm/firmware_bak/$firmware ]; then
               echo "Start building $firmware variant for itlwm"
               mv itlwm/firmware_bak/$firmware itlwm/firmware/
