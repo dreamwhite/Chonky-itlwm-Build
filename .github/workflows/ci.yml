@@ -48,8 +48,8 @@ jobs:
       - name: Build itlwm for each firmware
         working-directory: itlwm
         run: |
-          ls .
 
+          ls itlwm/
           # for firmware in ${{ steps.firmwares.outputs.FIRMWARES }}; do
           #   if [ -e itlwm/firmware_bak/$firmware ]; then
           #     echo "Start building $firmware variant for itlwm"
