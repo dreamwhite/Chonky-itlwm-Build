@@ -48,20 +48,22 @@ jobs:
       - name: Build itlwm for each firmware
         working-directory: itlwm
         run: |
-          for firmware in ${{ steps.firmwares.outputs.FIRMWARES }}; do
-            if [ -e itlwm/firmware_bak/$firmware ]; then
-              echo "Start building $firmware variant for itlwm"
-              mv itlwm/firmware_bak/$firmware itlwm/firmware/
-              xcodebuild -project itlwm.xcodeproj -scheme "AirportItlwm (all)" -configuration Release -sdk macosx -derivedDataPath out
-              xcodebuild -project itlwm.xcodeproj -scheme itlwm -configuration Release -sdk macosx -derivedDataPath out
-              mkdir out/Build/Products/Release/itlwm
-              mv out/Build/Products/Release/itlwm.kext out/Build/Products/Release/itlwm.kext.dSYM out/Build/Products/Release/itlwm
-              7z a -r out/Build/Products/Release/$firmware.zip out/Build/Products/Release/*
-              mv out/Build/Products/Release/$firmware.zip ../Kexts
-              rm -rf itlwm/firmware/$firmware out
-              echo "Finished building $firmware variant for itlwm"
-            fi
-          done;
+          ls .
+
+          # for firmware in ${{ steps.firmwares.outputs.FIRMWARES }}; do
+          #   if [ -e itlwm/firmware_bak/$firmware ]; then
+          #     echo "Start building $firmware variant for itlwm"
+          #     mv itlwm/firmware_bak/$firmware itlwm/firmware/
+          #     xcodebuild -project itlwm.xcodeproj -scheme "AirportItlwm (all)" -configuration Release -sdk macosx -derivedDataPath out
+          #     xcodebuild -project itlwm.xcodeproj -scheme itlwm -configuration Release -sdk macosx -derivedDataPath out
+          #     mkdir out/Build/Products/Release/itlwm
+          #     mv out/Build/Products/Release/itlwm.kext out/Build/Products/Release/itlwm.kext.dSYM out/Build/Products/Release/itlwm
+          #     7z a -r out/Build/Products/Release/$firmware.zip out/Build/Products/Release/*
+          #     mv out/Build/Products/Release/$firmware.zip ../Kexts
+          #     rm -rf itlwm/firmware/$firmware out
+          #     echo "Finished building $firmware variant for itlwm"
+          #   fi
+          # done;
       - name: Upload to artifacts
         if: always()
         uses: actions/upload-artifact@v3
