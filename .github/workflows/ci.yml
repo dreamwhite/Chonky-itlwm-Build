@@ -49,7 +49,7 @@ jobs:
             if [ -d firmware_bak/$firmware ]; then
               echo "Start building $firmware variant for itlwm"
               mv firmware_bak/$firmware firmware/
-              xcodebuild -project itlwm.xcodeproj -scheme AirportItlwm (all) -configuration Release -sdk macosx -derivedDataPath out              mv out/Build/Products/Release/*.zip ../Kexts/$codec.zip
+              xcodebuild -project itlwm.xcodeproj -scheme AirportItlwm (all) -configuration Release -sdk macosx -derivedDataPath out
               xcodebuild -project itlwm.xcodeproj -scheme itlwm -configuration Release -sdk macosx -derivedDataPath out
               mkdir out/Build/Products/Release/itlwm
               mv out/Build/Products/Release/itlwm.kext out/Build/Products/Release/itlwm.kext.dSYM out/Build/Products/Release/itlwm
