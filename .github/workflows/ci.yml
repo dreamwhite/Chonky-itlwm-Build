@@ -44,12 +44,12 @@ jobs:
         run: echo '::set-output name=FIRMWARES::$(ls itlwm/firmware_bak)'
         id: firmwares
       - name: Build itlwm for each firmware
-        working-directory: itlwm
+        working-directory: itlwm/itlwm
         run: |
           for firmware in ${{ steps.firmwares.outputs.FIRMWARES }}; do
-            if [ -d itlwm/firmware_bak/$firmware ]; then
+            if [ -e firmware_bak/$firmware ]; then
               echo "Start building $firmware variant for itlwm"
-              mv itlwm/firmware_bak/$firmware itlwm/firmware/
+              mv firmware_bak/$firmware firmware/
               xcodebuild -project itlwm.xcodeproj -scheme "AirportItlwm (all)" -configuration Release -sdk macosx -derivedDataPath out
               xcodebuild -project itlwm.xcodeproj -scheme itlwm -configuration Release -sdk macosx -derivedDataPath out
               mkdir out/Build/Products/Release/itlwm
