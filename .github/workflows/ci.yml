@@ -40,8 +40,10 @@ jobs:
           mkdir firmware
           ls .
       - name: Set firmwares list
-        working-directory: itlwm
-        run: echo '::set-output name=FIRMWARES::$(ls itlwm/firmware_bak)'
+        working-directory: itlwm/itlwm
+        run: |
+          ls firmware_bak
+          echo '::set-output name=FIRMWARES::$(ls firmware_bak)'
         id: firmwares
       - name: Build itlwm for each firmware
         working-directory: itlwm/itlwm
