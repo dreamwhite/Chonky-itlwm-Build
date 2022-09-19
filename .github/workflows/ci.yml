@@ -27,7 +27,7 @@ jobs:
         run: git checkout ${{ steps.itlwm-latest-release.outputs.tag-name }}
       - name: Remove compressed FwBinary.cpp
         working-directory: itlwm
-        run: "[ -e include/FwBinary.cpp ] && rm -rf include/FwBinary.cpp"
+        run: "[ ! -e include/FwBinary.cpp ] && rm -rf include/FwBinary.cpp"
       - name: Clone MacKernelSDK from source
         working-directory: AppleALC
         run: |
