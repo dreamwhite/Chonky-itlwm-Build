@@ -58,7 +58,7 @@ jobs:
               mv out/Build/Products/Release/itlwm.kext out/Build/Products/Release/itlwm.kext.dSYM out/Build/Products/Release/itlwm
               7z a -r out/Build/Products/Release/$firmware.zip out/Build/Products/Release/*
               mv out/Build/Products/Release/$firmware.zip ../Kexts
-              rm -rf firmware/$firmware out
+              rm -rf itlwm/firmware/$firmware out
               echo "Finished building $firmware variant for itlwm"
             fi
           done;
