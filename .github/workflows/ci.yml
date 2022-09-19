@@ -41,7 +41,7 @@ jobs:
       - name: Build itlwm for each firmware
         working-directory: itlwm
         run: |
-          for firmware in itlwm/firmware_bak; do
+          for firmware in $(ls itlwm/firmware_bak); do
             echo $firmware
             if [ -e itlwm/firmware_bak/$firmware ]; then
               echo "Start building $firmware variant for itlwm"
