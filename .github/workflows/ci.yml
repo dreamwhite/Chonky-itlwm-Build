@@ -45,6 +45,7 @@ jobs:
             if [ ! -e itlwm/firmware/$firmware ]; then
               echo "Start building $firmware variant for itlwm"
               mv itlwm/firmware_bak/$firmware itlwm/firmware/
+              ls itlwm/firmware
               xcodebuild -quiet -project itlwm.xcodeproj -scheme "AirportItlwm (all)" -configuration Release -sdk macosx -derivedDataPath out > /dev/null
               #xcodebuild -quiet -project itlwm.xcodeproj -scheme itlwm -configuration Release -sdk macosx -derivedDataPath out > /dev/null
               #mkdir out/Build/Products/Release/itlwm
