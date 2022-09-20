@@ -4,7 +4,7 @@ on:
   pull_request:
   workflow_dispatch:
   release:
-    types: [published]
+    types: [prereleased, published]
 jobs:
   build:
     name: Build AirportItlwm and itlwm
