@@ -2,6 +2,7 @@ name: Build
 on:
   push:
   pull_request:
+  workflow_dispatch:
   release:
     types: [prereleased, published]
 jobs:
@@ -41,6 +42,7 @@ jobs:
         working-directory: itlwm
         run: |
           for firmware in $(ls itlwm/firmware_bak); do
+            echo $firmware
             if [ -e itlwm/firmware_bak/$firmware ]; then
               echo "Start building $firmware variant for itlwm"
               mv itlwm/firmware_bak/$firmware itlwm/firmware/
@@ -62,9 +64,10 @@ jobs:
           path: Kexts/*
       - name: Upload to Release
         if: github.event_name == 'release'
-        uses: AButler/upload-release-assets@v2.0
+        uses: svenstaro/upload-release-action@v2
         with:
-          files: Kexts/*.zip
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          release-tag: ${{ github.ref }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: Kexts/*.zip
+          tag: ${{ github.ref }}
+          file_glob: true
 
