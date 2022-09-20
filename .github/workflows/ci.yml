@@ -53,7 +53,6 @@ jobs:
               rm -rf itlwm/firmware/$firmware out
               [ -e include/FwBinary.cpp ] && rm -rf include/FwBinary.cpp
               echo "Finished building $firmware variant for itlwm"
-              exit
             fi
           done;
       - name: Upload to artifacts
