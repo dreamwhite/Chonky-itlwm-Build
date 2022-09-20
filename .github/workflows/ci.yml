@@ -26,7 +26,7 @@ jobs:
         run: git checkout ${{ steps.itlwm-latest-release.outputs.tag-name }}
       - name: Remove compressed FwBinary.cpp
         working-directory: itlwm
-        run: "[ ! -e include/FwBinary.cpp ] && rm -rf include/FwBinary.cpp"
+        run: "[ -e include/FwBinary.cpp ] && rm -rf include/FwBinary.cpp"
       - name: Clone MacKernelSDK from source
         working-directory: itlwm
         run: |
@@ -43,14 +43,15 @@ jobs:
           for firmware in $(ls itlwm/firmware_bak); do
             if [ ! -e itlwm/firmware/$firmware ]; then
               echo "Start building $firmware variant for itlwm"
-              mv itlwm/firmware_bak/iwm-8000C-36 itlwm/firmware/
+              mv itlwm/firmware_bak/$firmware itlwm/firmware/
               xcodebuild -quiet -project itlwm.xcodeproj -scheme "AirportItlwm (all)" -configuration Release -sdk macosx -derivedDataPath out > /dev/null
-              #xcodebuild -quiet -project itlwm.xcodeproj -scheme itlwm -configuration Release -sdk macosx -derivedDataPath out > /dev/null
-              #mkdir out/Build/Products/Release/itlwm
-              #mv out/Build/Products/Release/itlwm.kext out/Build/Products/Release/itlwm.kext.dSYM out/Build/Products/Release/itlwm
+              xcodebuild -quiet -project itlwm.xcodeproj -scheme itlwm -configuration Release -sdk macosx -derivedDataPath out > /dev/null
+              mkdir out/Build/Products/Release/itlwm
+              mv out/Build/Products/Release/itlwm.kext out/Build/Products/Release/itlwm.kext.dSYM out/Build/Products/Release/itlwm
               (cd out/Build/Products/Release; zip -r $firmware.zip .)
               mv out/Build/Products/Release/$firmware.zip ../Kexts
               rm -rf itlwm/firmware/$firmware out
+              [ -e include/FwBinary.cpp ] && rm -rf include/FwBinary.cpp
               echo "Finished building $firmware variant for itlwm"
               exit
             fi
