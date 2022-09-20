@@ -46,11 +46,11 @@ jobs:
             if [ -e itlwm/firmware_bak/$firmware ]; then
               echo "Start building $firmware variant for itlwm"
               mv itlwm/firmware_bak/$firmware itlwm/firmware/
-              xcodebuild -quiet -project itlwm.xcodeproj -scheme "AirportItlwm (all)" -configuration Release -sdk macosx -derivedDataPath out
-              xcodebuild -quiet -project itlwm.xcodeproj -scheme itlwm -configuration Release -sdk macosx -derivedDataPath out
+              xcodebuild -quiet -project itlwm.xcodeproj -scheme "AirportItlwm (all)" -configuration Release -sdk macosx -derivedDataPath out > /dev/null
+              xcodebuild -quiet -project itlwm.xcodeproj -scheme itlwm -configuration Release -sdk macosx -derivedDataPath out > /dev/null
               mkdir out/Build/Products/Release/itlwm
               mv out/Build/Products/Release/itlwm.kext out/Build/Products/Release/itlwm.kext.dSYM out/Build/Products/Release/itlwm
-              7z a -r out/Build/Products/Release/$firmware.zip out/Build/Products/Release/*
+              (cd out/Build/Products/Release; zip -r $firmware.zip .)
               mv out/Build/Products/Release/$firmware.zip ../Kexts
               rm -rf itlwm/firmware/$firmware out
               echo "Finished building $firmware variant for itlwm"
