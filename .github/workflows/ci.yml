@@ -41,11 +41,9 @@ jobs:
         working-directory: itlwm
         run: |
           for firmware in $(ls itlwm/firmware_bak); do
-            echo $firmware
             if [ ! -e itlwm/firmware/$firmware ]; then
               echo "Start building $firmware variant for itlwm"
-              mv itlwm/firmware_bak/$firmware itlwm/firmware/
-              ls itlwm/firmware
+              mv itlwm/firmware_bak/iwm-8000C-36 itlwm/firmware/
               xcodebuild -quiet -project itlwm.xcodeproj -scheme "AirportItlwm (all)" -configuration Release -sdk macosx -derivedDataPath out > /dev/null
               #xcodebuild -quiet -project itlwm.xcodeproj -scheme itlwm -configuration Release -sdk macosx -derivedDataPath out > /dev/null
               #mkdir out/Build/Products/Release/itlwm
