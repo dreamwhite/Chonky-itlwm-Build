@@ -2,7 +2,6 @@ name: Build
 on:
   push:
   pull_request:
-  workflow_dispatch:
   release:
     types: [prereleased, published]
 jobs:
@@ -27,7 +26,7 @@ jobs:
         run: git checkout ${{ steps.itlwm-latest-release.outputs.tag-name }}
       - name: Remove compressed FwBinary.cpp
         working-directory: itlwm
-        run: "[ ! -e include/FwBinary.cpp ] && rm -rf include/FwBinary.cpp"
+        run: "[ -e include/FwBinary.cpp ] && rm -rf include/FwBinary.cpp"
       - name: Clone MacKernelSDK from source
         working-directory: itlwm
         run: |
@@ -42,8 +41,7 @@ jobs:
         working-directory: itlwm
         run: |
           for firmware in $(ls itlwm/firmware_bak); do
-            echo $firmware
-            if [ -e itlwm/firmware_bak/$firmware ]; then
+            if [ ! -e itlwm/firmware/$firmware ]; then
               echo "Start building $firmware variant for itlwm"
               mv itlwm/firmware_bak/$firmware itlwm/firmware/
               xcodebuild -quiet -project itlwm.xcodeproj -scheme "AirportItlwm (all)" -configuration Release -sdk macosx -derivedDataPath out > /dev/null
@@ -53,6 +51,7 @@ jobs:
               (cd out/Build/Products/Release; zip -r $firmware.zip .)
               mv out/Build/Products/Release/$firmware.zip ../Kexts
               rm -rf itlwm/firmware/$firmware out
+              [ -e include/FwBinary.cpp ] && rm -rf include/FwBinary.cpp
               echo "Finished building $firmware variant for itlwm"
             fi
           done;
