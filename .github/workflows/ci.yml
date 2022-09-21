@@ -26,8 +26,7 @@ jobs:
         run: git checkout ${{ steps.itlwm-latest-release.outputs.tag-name }}
       - name: Remove compressed FwBinary.cpp
         working-directory: itlwm
-        run: "[ ! -e include/FwBinary.cpp ] && rm -rf 
-include/FwBinary.cpp"
+        run: "[ ! -e include/FwBinary.cpp ] && rm -rf include/FwBinary.cpp"
       - name: Clone MacKernelSDK from source
         working-directory: itlwm
         run: |
@@ -51,8 +50,7 @@ include/FwBinary.cpp"
               mv out/Build/Products/Release/itlwm.kext out/Build/Products/Release/itlwm.kext.dSYM out/Build/Products/Release/itlwm
               (cd out/Build/Products/Release; zip -r $firmware.zip .)
               mv out/Build/Products/Release/$firmware.zip ../Kexts
-              rm -rf itlwm/firmware/$firmware out
-              [ ! -e include/FwBinary.cpp ] && rm -rf include/FwBinary.cpp
+              rm -rf itlwm/firmware/$firmware out include/FwBinary.cpp
               echo "Finished building $firmware variant for itlwm"
             fi
           done;
